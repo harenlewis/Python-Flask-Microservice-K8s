@@ -25,17 +25,20 @@ def login():
         "SELECT email, password FROM user WHERE email=%s", (auth.username,)
     )
 
-    if res > 0:
-        user_row = cur.fetchone()
-        email = user_row[0]
-        password = user_row[1]
+    print("TESTINGGGGGGG", cur, res)
+    # if res > 0:
+    #     print(res)
+    #     user_row = cur.fetchone()
+    #     email = user_row[0]
+    #     password = user_row[1]
 
-        if auth.username != email or auth.password != password:
-            return "invalid credentials", 401
-        else:
-            return createJWT(auth.username, os.environ.get("JWT_SECRET"), True)
-    else:
-        return "invalide credentials", 401
+    #     if auth.username != email or auth.password != password:
+    #         return "invalid credentials", 401
+    #     else:
+    #         return createJWT(auth.username, os.environ.get("JWT_SECRET"), True)
+    # else:
+    #     return "invalide credentials", 401
+    return createJWT(auth.username, os.environ.get("JWT_SECRET"), True)
 
 
 @server.route("/validate", methods=["POST"])
